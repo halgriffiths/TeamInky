@@ -7,6 +7,7 @@
 #include "FPSObjectiveActor.generated.h"
 
 class USphereComponent;
+class APowerUpSpawner;
 
 UCLASS()
 class FPSGAME_API AFPSObjectiveActor : public AActor
@@ -16,6 +17,9 @@ class FPSGAME_API AFPSObjectiveActor : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AFPSObjectiveActor();
+
+private:
+	APowerUpSpawner* PowerUpSpawner;
 
 protected:
 
