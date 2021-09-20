@@ -7,6 +7,7 @@
 #include "FPSObjectiveActor.generated.h"
 
 class USphereComponent;
+class APowerUpSpawner;
 
 UCLASS()
 class FPSGAME_API AFPSObjectiveActor : public AActor
@@ -36,5 +37,9 @@ protected:
 public:	
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
+	// Reference to the PowerUpSpawner that created this Actor.
+	APowerUpSpawner* PowerUpSpawner;
+
 	
 };

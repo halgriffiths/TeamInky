@@ -1,4 +1,4 @@
-# Stealth Game - Unreal Engine 4 C++ Udemy Course [Project 1]
+# Team Inky Game-Jam project 2021
 
 Contains finished project for "Stealth Game" as part of the Udemy Course: **[Unreal Engine 4 Mastery: Create Multiplayer Games with C++](https://www.udemy.com/unrealengine-cpp/?couponCode=TLGH14)**
 
@@ -32,3 +32,4 @@ Based on my simplified FPS Template: https://github.com/tomlooman/SimpleFPSTempl
 Get the Udemy Course now and learn C++ for Unreal Engine 4: [DISCOUNT LINK](https://www.udemy.com/unrealengine-cpp/?couponCode=TLGH14)
 
 (Content in this project may only be used in Unreal Engine projects as per the Unreal Engine EULA)
+Forked from base project by Tom Looman (see `oldREADME.md`)

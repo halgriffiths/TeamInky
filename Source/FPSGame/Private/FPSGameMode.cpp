@@ -6,6 +6,9 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "FPSGameState.h"
+#include "SelectionZone.h"
+#include "FPSPlayerController.h"
+#include "EngineUtils.h"
 
 AFPSGameMode::AFPSGameMode()
 {
@@ -19,6 +22,60 @@ AFPSGameMode::AFPSGameMode()
 	GameStateClass = AFPSGameState::StaticClass();
 }
 
+
+void AFPSGameMode::OnPlayerEnterSelectionZone(AFPSPlayerController* ControllerInstigator)
+{
+
+	if (ControllerInstigator->bIsPacMan)
+	{
+		bHasPacMan = true;
+	}
+
+	CheckStartingConditions();
+}
+
+void AFPSGameMode::CheckStartingConditions()
+{
+	// If the number of occupied zones == the number of players and we have a PacMan we are good to go.
+	int OccupiedZones = 0;
+	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
+	{
+		if (Zone->bIsOccupied)
+		{
+			OccupiedZones++;
+		}
+	}
+
+	TArray<AActor*> ReturnedActors;
+	UGameplayStatics::GetAllActorsOfClass(this, AFPSPlayerController::StaticClass(), ReturnedActors);
+
+	if (bHasPacMan && OccupiedZones == ReturnedActors.Num())
+	{
+		StartGame();
+	}
+}
+
+void AFPSGameMode::StartGame()
+{
+	// Iterate over all PlayerControllers and make them posses a Pawn that is in the PacManMap.
+
+	for (AFPSPlayerController* Controller : TActorRange<AFPSPlayerController>(GetWorld()))
+	{
+		if (Controller->bIsPacMan)
+		{
+			// Posses PacMan
+			// Currently BP implementation because idk if it's possible to get a reference to a BP class in C++.
+			PossesPacMan(Controller);
+		}
+		else
+		{
+			// Posess a Ghost
+			// Currently BP implementation because idk if it's possible to get a reference to a BP class in C++.
+			PossesGhost(Controller);
+		}
+	}
+	
+}
 
 void AFPSGameMode::CompleteMission(APawn* InstigatorPawn, bool bMissionSuccess)
 {

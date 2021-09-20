@@ -5,13 +5,15 @@
 #include "Components/SphereComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "FPSCharacter.h"
-
+#include "PowerUpSpawner.h"
 
 // Sets default values
 AFPSObjectiveActor::AFPSObjectiveActor()
 {
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
+	MeshComp->SetStaticMesh(SphereMeshAsset.Object);
 	RootComponent = MeshComp;
 
 	SphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
@@ -29,6 +31,19 @@ void AFPSObjectiveActor::BeginPlay()
 	Super::BeginPlay();
 	
 	PlayEffects();
+
+	TArray<AActor*> ReturnedActors;
+	UGameplayStatics::GetAllActorsOfClass(this, APowerUpSpawner::StaticClass(), ReturnedActors);
+
+	if (ReturnedActors.Num() > 0)
+	{
+		APowerUpSpawner* PS = Cast<APowerUpSpawner>(ReturnedActors[0]);
+		if (PS)
+		{
+			PowerUpSpawner = PS;
+		}
+	}
+
 }
 
 void AFPSObjectiveActor::PlayEffects()
@@ -50,6 +65,9 @@ void AFPSObjectiveActor::NotifyActorBeginOverlap(AActor* OtherActor)
 		{
 			MyCharacter->bIsCarryingObjective = true;
 
+			// Notify the PowerUpSpawner that this PowerUp has been picked up
+			PowerUpSpawner->OnPowerUpPickUp();
+			
 			Destroy();
 		}
 	}
