@@ -10,8 +10,7 @@ APowerUpSpawner::APowerUpSpawner()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	SpawnLocations.Add(FVector(-180, 270, 200));
-	SpawnLocations.Add(FVector(-200, 300, 200));
+	SetHidden(true);
 }
 
 // Called when the game starts or when spawned
@@ -19,37 +18,24 @@ void APowerUpSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Spawn a PowerUp at every location
-	int n = SpawnLocations.Num();
-	for (int i = 0; i < n; ++i)
-	{
-		SpawnPowerUp(SpawnLocations[i]);
-	}
-	
+	SpawnPowerUp();
 }
 
-// Called every frame
-void APowerUpSpawner::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
-void APowerUpSpawner::OnPowerUpPickUp(FVector Location)
+void APowerUpSpawner::OnPowerUpPickUp()
 {
 	FTimerDelegate TimerDel;
 	FTimerHandle TimerHandle;
 
-	TimerDel.BindUFunction(this, FName("SpawnPowerUp"), Location);
+	TimerDel.BindUFunction(this, FName("SpawnPowerUp"));
 	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, 2.f, false);
-
-
-	UE_LOG(LogTemp, Warning, TEXT("AHA, I picked up something!"));
 }
 
-void APowerUpSpawner::SpawnPowerUp(FVector Location)
+void APowerUpSpawner::SpawnPowerUp()
 {
 	FActorSpawnParameters SpawnInfo;
-	GetWorld()->SpawnActor<AFPSObjectiveActor>(AFPSObjectiveActor::StaticClass(), Location, FRotator(0, 0, 0), SpawnInfo);
-
+	AFPSObjectiveActor* SpawnedPowerUpRef = GetWorld()->SpawnActor<AFPSObjectiveActor>(AFPSObjectiveActor::StaticClass(), GetActorLocation(), FRotator(0, 0, 0), SpawnInfo);
+	if (SpawnedPowerUpRef)
+	{
+		SpawnedPowerUpRef->PowerUpSpawner = this;
+	}
 }

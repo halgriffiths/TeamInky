@@ -66,7 +66,7 @@ void AFPSObjectiveActor::NotifyActorBeginOverlap(AActor* OtherActor)
 			MyCharacter->bIsCarryingObjective = true;
 
 			// Notify the PowerUpSpawner that this PowerUp has been picked up
-			PowerUpSpawner->OnPowerUpPickUp(GetActorLocation());
+			PowerUpSpawner->OnPowerUpPickUp();
 			
 			Destroy();
 		}
