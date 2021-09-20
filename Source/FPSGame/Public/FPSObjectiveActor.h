@@ -18,9 +18,6 @@ public:
 	// Sets default values for this actor's properties
 	AFPSObjectiveActor();
 
-private:
-	APowerUpSpawner* PowerUpSpawner;
-
 protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -40,5 +37,9 @@ protected:
 public:	
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
+	// Reference to the PowerUpSpawner that created this Actor.
+	APowerUpSpawner* PowerUpSpawner;
+
 	
 };
