@@ -19,5 +19,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "PlayerController")
 	void OnMissionCompleted(APawn* InstigatorPawn, bool bMissionSuccess);
 	
+	bool bIsPacMan;
+
 	
 };
