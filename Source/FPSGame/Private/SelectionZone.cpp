@@ -30,6 +30,7 @@ ASelectionZone::ASelectionZone()
 	DecalComp->DecalSize = FVector(200.0f, 200.0f, 200.0f);
 	DecalComp->SetupAttachment(RootComponent);
 
+	CurrentOccupiers = 0;
 }
 
 
@@ -43,7 +44,7 @@ void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 	if (InstigatorPawn)
 	{
-		bIsOccupied = true;
+		CurrentOccupiers++;
 
 		// Get the Controller that is posessing the Pawn
 
@@ -57,7 +58,6 @@ void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 				ControllerInstigator->bIsPacMan = true;
 			}
 
-			// This logic should always happen on the Server
 			AFPSGameMode* GM = Cast<AFPSGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
 			if (GM)
@@ -66,10 +66,6 @@ void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 			}
 		}
 
-		if (bIsPacManZone)
-		{
-			
-		}
 		UE_LOG(LogTemp, Log, TEXT("Overlapped with selection zone!"));
 
 	}
@@ -82,10 +78,18 @@ void ASelectionZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 
 	if (InstigatorPawn)
 	{
-		bIsOccupied = false;
+		CurrentOccupiers --;
 		OccupyingController = nullptr;
 
-		UE_LOG(LogTemp, Log, TEXT("Finished overlapping with selection zone!"));
+		AFPSPlayerController* ControllerInstigator = Cast<AFPSPlayerController>(InstigatorPawn->GetController());
 
+		if (ControllerInstigator)
+		{
+			OccupyingController = ControllerInstigator;
+			if (bIsPacManZone)
+			{
+				ControllerInstigator->bIsPacMan = false;
+			}
+		}
 	}
 }

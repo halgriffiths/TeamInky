@@ -21,7 +21,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Zone Type")
 	bool bIsPacManZone;
 
-	bool bIsOccupied;
+	int CurrentOccupiers;
 
 	UPROPERTY(BlueprintReadOnly, Category ="Selection Zone")
 	AFPSPlayerController* OccupyingController;

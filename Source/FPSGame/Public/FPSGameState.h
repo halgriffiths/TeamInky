@@ -16,7 +16,7 @@ class FPSGAME_API AFPSGameState : public AGameStateBase
 	
 public:
 
-	UFUNCTION(NetMulticast, Reliable)
+	UFUNCTION(NetMulticast, BlueprintCallable, Reliable)
 	void MulticastOnMissionComplete(APawn* InstigatorPawn, bool bMissionSuccess);
 	
 	
