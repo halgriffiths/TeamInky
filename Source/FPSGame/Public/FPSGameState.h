@@ -6,6 +6,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "FPSGameState.generated.h"
 
+class APawn;
 /**
  * 
  */
@@ -19,5 +20,6 @@ public:
 	UFUNCTION(NetMulticast, BlueprintCallable, Reliable)
 	void MulticastOnMissionComplete(APawn* InstigatorPawn, bool bMissionSuccess);
 	
-
+	UFUNCTION(NetMulticast, BlueprintCallable, Reliable)
+	void EndGame();
 };

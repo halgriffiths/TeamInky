@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "PlayerController")
 	void OnMissionCompleted(APawn* InstigatorPawn, bool bMissionSuccess);
 	
+	UFUNCTION(BlueprintImplementableEvent, Category = "PlayerController")
+	void OnGameOver();
+
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsPacMan;
 
