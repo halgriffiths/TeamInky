@@ -22,7 +22,7 @@ protected:
 public:	
 	void OnPowerUpPickUp();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintImplementableEvent)
 	void SpawnPowerUp();
 
 	/* Handle to manage the timer */

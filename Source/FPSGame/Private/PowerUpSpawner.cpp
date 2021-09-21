@@ -30,8 +30,10 @@ void APowerUpSpawner::OnPowerUpPickUp()
 	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, 2.f, false);
 }
 
+/*
 void APowerUpSpawner::SpawnPowerUp()
 {
+
 	FActorSpawnParameters SpawnInfo;
 	AFPSObjectiveActor* SpawnedPowerUpRef = GetWorld()->SpawnActor<AFPSObjectiveActor>(AFPSObjectiveActor::StaticClass(), GetActorLocation(), FRotator(0, 0, 0), SpawnInfo);
 	if (SpawnedPowerUpRef)
@@ -39,3 +41,4 @@ void APowerUpSpawner::SpawnPowerUp()
 		SpawnedPowerUpRef->PowerUpSpawner = this;
 	}
 }
+*/

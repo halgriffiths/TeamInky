@@ -39,6 +39,7 @@ public:
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 	// Reference to the PowerUpSpawner that created this Actor.
+	UPROPERTY(BlueprintReadWrite)
 	APowerUpSpawner* PowerUpSpawner;
 
 	
