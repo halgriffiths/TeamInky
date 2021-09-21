@@ -22,17 +22,6 @@ class AFPSCharacter : public ACharacter
 
 protected:
 
-	/** Pawn mesh: 1st person view  */
-	/*
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Mesh")
-	USkeletalMeshComponent* Mesh1PComponent;
-
-	/** Gun mesh: 1st person view (seen only by self) */
-	/*
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh")
-	USkeletalMeshComponent* GunMeshComponent;
-	*/
-	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	UCameraComponent* CameraComponent;
 
