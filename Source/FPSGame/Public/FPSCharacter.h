@@ -81,5 +81,14 @@ public:
 	UCameraComponent* GetFirstPersonCameraComponent() const { return CameraComponent; }
 	
 	virtual void Tick(float DeltaTime) override;
+
+
+	UFUNCTION(BlueprintCallable)
+	void PacManKilled();
+
+	/*
+	UFUNCTION(BlueprintCallabe)
+	void GhostKilled();
+	*/
 };
 

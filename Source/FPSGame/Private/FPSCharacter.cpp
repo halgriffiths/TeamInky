@@ -8,7 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/PawnNoiseEmitterComponent.h"
 #include "Net/UnrealNetwork.h"
-
+#include "FPSGameMode.h"
 
 AFPSCharacter::AFPSCharacter()
 {
@@ -141,4 +141,15 @@ void AFPSCharacter::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & Out
 	DOREPLIFETIME(AFPSCharacter, bIsCarryingObjective);
 
 	//DOREPLIFETIME_CONDITION(AFPSCharacter, bIsCarryingObjective, COND_OwnerOnly);
+}
+
+
+void AFPSCharacter::PacManKilled()
+{
+	AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
+	if (GM)
+	{
+		GM->EndGame();
+	}
+	
 }

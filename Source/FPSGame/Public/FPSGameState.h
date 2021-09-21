@@ -19,5 +19,5 @@ public:
 	UFUNCTION(NetMulticast, BlueprintCallable, Reliable)
 	void MulticastOnMissionComplete(APawn* InstigatorPawn, bool bMissionSuccess);
 	
-	
+
 };

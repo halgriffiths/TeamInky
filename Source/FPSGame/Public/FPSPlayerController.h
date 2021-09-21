@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "FPSPlayerController.generated.h"
 
+class APawn;
+
 /**
  * 
  */
@@ -22,5 +24,7 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsPacMan;
 
+	UPROPERTY(BlueprintReadWrite)
+	APawn* PreviousPawn;
 	
 };

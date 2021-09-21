@@ -36,6 +36,9 @@ public:
 	void CheckStartingConditions();
 
 	void StartGame();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void EndGame();
 };
 
 
