@@ -8,6 +8,7 @@
 #include "FPSPlayerController.h"
 #include "FPSGameMode.h"
 #include "Kismet/GameplayStatics.h"
+#include "FPSPlayerController.h"
 
 // Sets default values
 ASelectionZone::ASelectionZone()
@@ -50,6 +51,7 @@ void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 		if (ControllerInstigator)
 		{
+			OccupyingController = ControllerInstigator;
 			if (bIsPacManZone)
 			{
 				ControllerInstigator->bIsPacMan = true;
@@ -80,9 +82,8 @@ void ASelectionZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 
 	if (InstigatorPawn)
 	{
-		// Get the Controller that is posessing the Pawn
-
 		bIsOccupied = false;
+		OccupyingController = nullptr;
 
 		UE_LOG(LogTemp, Log, TEXT("Finished overlapping with selection zone!"));
 

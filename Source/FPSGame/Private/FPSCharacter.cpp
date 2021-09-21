@@ -19,6 +19,7 @@ AFPSCharacter::AFPSCharacter()
 	CameraComponent->bUsePawnControlRotation = true;
 
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
+	/*
 	Mesh1PComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh"));
 	Mesh1PComponent->SetupAttachment(CameraComponent);
 	Mesh1PComponent->CastShadow = false;
@@ -29,7 +30,7 @@ AFPSCharacter::AFPSCharacter()
 	GunMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
 	GunMeshComponent->CastShadow = false;
 	GunMeshComponent->SetupAttachment(Mesh1PComponent, "GripPoint");
-
+	*/
 	NoiseEmitterComponent = CreateDefaultSubobject<UPawnNoiseEmitterComponent>(TEXT("NoiseEmitter"));
 }
 
@@ -78,11 +79,12 @@ void AFPSCharacter::Fire()
 	if (FireAnimation)
 	{
 		// Get the animation object for the arms mesh
-		UAnimInstance* AnimInstance = Mesh1PComponent->GetAnimInstance();
+		/*UAnimInstance* AnimInstance = Mesh1PComponent->GetAnimInstance();
 		if (AnimInstance)
 		{
 			AnimInstance->PlaySlotAnimationAsDynamicMontage(FireAnimation, "Arms", 0.0f);
 		}
+		*/
 	}
 }
 
@@ -92,8 +94,8 @@ void AFPSCharacter::ServerFire_Implementation()
 	// try and fire a projectile
 	if (ProjectileClass)
 	{
-		FVector MuzzleLocation = GunMeshComponent->GetSocketLocation("Muzzle");
-		FRotator MuzzleRotation = GunMeshComponent->GetSocketRotation("Muzzle");
+		//FVector MuzzleLocation = GunMeshComponent->GetSocketLocation("Muzzle");
+		//FRotator MuzzleRotation = GunMeshComponent->GetSocketRotation("Muzzle");
 
 		//Set Spawn Collision Handling Override
 		FActorSpawnParameters ActorSpawnParams;
@@ -101,7 +103,7 @@ void AFPSCharacter::ServerFire_Implementation()
 		ActorSpawnParams.Instigator = this;
 
 		// spawn the projectile at the muzzle
-		GetWorld()->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, ActorSpawnParams);
+		//GetWorld()->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, ActorSpawnParams);
 	}
 }
 

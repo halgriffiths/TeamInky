@@ -59,19 +59,11 @@ void AFPSGameMode::StartGame()
 {
 	// Iterate over all PlayerControllers and make them posses a Pawn that is in the PacManMap.
 
-	for (AFPSPlayerController* Controller : TActorRange<AFPSPlayerController>(GetWorld()))
+	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
 	{
-		if (Controller->bIsPacMan)
+		if (Zone->OccupyingController)
 		{
-			// Posses PacMan
-			// Currently BP implementation because idk if it's possible to get a reference to a BP class in C++.
-			PossesPacMan(Controller);
-		}
-		else
-		{
-			// Posess a Ghost
-			// Currently BP implementation because idk if it's possible to get a reference to a BP class in C++.
-			PossesGhost(Controller);
+			Zone->SpawnCharacter();
 		}
 	}
 	

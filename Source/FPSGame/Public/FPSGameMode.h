@@ -29,11 +29,6 @@ public:
 
 	void OnPlayerEnterSelectionZone(AFPSPlayerController* ControllerInstigator);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
-	void PossesPacMan(AFPSPlayerController* Controller);
-
-	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
-	void PossesGhost(AFPSPlayerController* Controller);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
 	void OnMissionCompleted(APawn* InstigatorPawn, bool bMissionSuccess);

@@ -7,6 +7,7 @@
 #include "SelectionZone.generated.h"
 
 class UBoxComponent;
+class AFPSPlayerController;
 
 UCLASS()
 class FPSGAME_API ASelectionZone : public AActor
@@ -22,6 +23,12 @@ public:
 
 	bool bIsOccupied;
 
+	UPROPERTY(BlueprintReadOnly, Category ="Selection Zone")
+	AFPSPlayerController* OccupyingController;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "SelectionZone")
+	void SpawnCharacter();
+
 protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -35,5 +42,4 @@ protected:
 
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
 };
