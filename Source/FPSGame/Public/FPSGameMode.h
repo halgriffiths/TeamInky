@@ -40,10 +40,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
 	void StartTimer();
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool bIsGameRunning;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool bHasPacMan;
 };
 
