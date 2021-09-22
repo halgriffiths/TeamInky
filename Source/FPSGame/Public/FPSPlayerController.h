@@ -24,7 +24,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "PlayerController")
 	void OnGameOver();
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadWrite)
 	bool bIsPacMan;
 
 	UPROPERTY(BlueprintReadWrite)

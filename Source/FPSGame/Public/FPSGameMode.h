@@ -13,10 +13,6 @@ class AFPSGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-private:
-	bool bHasPacMan;
-
-
 protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Spectating")
@@ -44,6 +40,8 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsGameRunning;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool bHasPacMan;
 };
 
 
