@@ -9,6 +9,8 @@
 #include "SelectionZone.h"
 #include "FPSPlayerController.h"
 #include "EngineUtils.h"
+#include "GenericPlatform/GenericPlatformMath.h"
+
 
 AFPSGameMode::AFPSGameMode()
 {
@@ -20,6 +22,8 @@ AFPSGameMode::AFPSGameMode()
 	HUDClass = AFPSHUD::StaticClass();
 
 	GameStateClass = AFPSGameState::StaticClass();
+
+	bIsGameRunning = false;
 }
 
 
@@ -49,7 +53,7 @@ void AFPSGameMode::CheckStartingConditions()
 	TArray<AActor*> ReturnedActors;
 	UGameplayStatics::GetAllActorsOfClass(this, AFPSPlayerController::StaticClass(), ReturnedActors);
 
-	if (bHasPacMan && OccupiedZones == ReturnedActors.Num())
+	if (bHasPacMan && !bIsGameRunning && OccupiedZones == FGenericPlatformMath::Min(ReturnedActors.Num(), 5) && OccupiedZones >= 3)
 	{
 		StartGame();
 	}
@@ -57,8 +61,6 @@ void AFPSGameMode::CheckStartingConditions()
 
 void AFPSGameMode::StartGame()
 {
-	// Iterate over all PlayerControllers and make them posses a Pawn that is in the PacManMap.
-
 	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
 	{
 		if (Zone->OccupyingController)
@@ -66,6 +68,8 @@ void AFPSGameMode::StartGame()
 			Zone->SpawnCharacter();
 		}
 	}
+
+	bIsGameRunning = true;
 	
 }
 

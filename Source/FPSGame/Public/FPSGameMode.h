@@ -16,6 +16,7 @@ class AFPSGameMode : public AGameModeBase
 private:
 	bool bHasPacMan;
 
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Spectating")
@@ -39,6 +40,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void EndGame();
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsGameRunning;
+
 };
 
 
