@@ -30,7 +30,7 @@ ASelectionZone::ASelectionZone()
 	DecalComp->DecalSize = FVector(200.0f, 200.0f, 200.0f);
 	DecalComp->SetupAttachment(RootComponent);
 
-	CurrentOccupiers = 0;
+	//CurrentOccupiers = 0;
 }
 
 
@@ -44,7 +44,7 @@ void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 	if (InstigatorPawn)
 	{
-		CurrentOccupiers++;
+		//CurrentOccupiers++;
 
 		// Get the Controller that is posessing the Pawn
 
@@ -52,7 +52,13 @@ void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 		if (ControllerInstigator)
 		{
-			OccupyingController = ControllerInstigator;
+			if (CurrentOccupiers.Num() == 0)
+			{
+				OccupyingController = ControllerInstigator;
+			}
+
+			CurrentOccupiers.Add(ControllerInstigator);
+
 			if (bIsPacManZone)
 			{
 				ControllerInstigator->bIsPacMan = true;
@@ -78,18 +84,27 @@ void ASelectionZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* O
 
 	if (InstigatorPawn)
 	{
-		CurrentOccupiers --;
-		OccupyingController = nullptr;
+		//CurrentOccupiers --;
+		
 
 		AFPSPlayerController* ControllerInstigator = Cast<AFPSPlayerController>(InstigatorPawn->GetController());
 
 		if (ControllerInstigator)
 		{
-			OccupyingController = ControllerInstigator;
 			if (bIsPacManZone)
 			{
 				ControllerInstigator->bIsPacMan = false;
 			}
+		}
+		CurrentOccupiers.RemoveSwap(ControllerInstigator);
+
+		if (CurrentOccupiers.Num() == 0)
+		{
+			OccupyingController = nullptr;
+		}
+		else
+		{
+			OccupyingController = CurrentOccupiers[0];
 		}
 	}
 }

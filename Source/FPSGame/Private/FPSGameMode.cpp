@@ -44,7 +44,7 @@ void AFPSGameMode::CheckStartingConditions()
 	int OccupiedZones = 0;
 	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
 	{
-		if (Zone->CurrentOccupiers  == 1)
+		if (Zone->CurrentOccupiers.Num()  == 1)
 		{
 			OccupiedZones++;
 		}

@@ -21,13 +21,16 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Zone Type")
 	bool bIsPacManZone;
 
-	int CurrentOccupiers;
+	//int CurrentOccupiers;
 
-	UPROPERTY(BlueprintReadOnly, Category ="Selection Zone")
+	UPROPERTY(BlueprintReadWrite, Category ="Selection Zone")
 	AFPSPlayerController* OccupyingController;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SelectionZone")
 	void SpawnCharacter();
+
+	UPROPERTY(BlueprintReadWrite, Category = "Selection Zone")
+	TArray<AFPSPlayerController*> CurrentOccupiers;
 
 protected:
 
