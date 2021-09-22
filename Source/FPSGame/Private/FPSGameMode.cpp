@@ -70,7 +70,7 @@ void AFPSGameMode::StartGame()
 	}
 
 	bIsGameRunning = true;
-	
+	AFPSGameMode::StartTimer();
 }
 
 void AFPSGameMode::CompleteMission(APawn* InstigatorPawn, bool bMissionSuccess)

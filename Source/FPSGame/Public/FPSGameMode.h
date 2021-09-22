@@ -37,6 +37,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void EndGame();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
+	void StartTimer();
+
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsGameRunning;
 
