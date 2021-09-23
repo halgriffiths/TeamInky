@@ -72,7 +72,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Server, BlueprintCallable, Reliable)
 	void PacManKilled();
 
 	/*

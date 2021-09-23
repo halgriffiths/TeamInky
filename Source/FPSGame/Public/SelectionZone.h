@@ -18,7 +18,7 @@ public:
 	// Sets default values for this actor's properties
 	ASelectionZone();
 
-	UPROPERTY(EditAnywhere, Category = "Zone Type")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Zone Type")
 	bool bIsPacManZone;
 
 	//int CurrentOccupiers;

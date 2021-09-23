@@ -144,7 +144,7 @@ void AFPSCharacter::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & Out
 }
 
 
-void AFPSCharacter::PacManKilled()
+void AFPSCharacter::PacManKilled_Implementation()
 {
 	AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
 	if (GM)
