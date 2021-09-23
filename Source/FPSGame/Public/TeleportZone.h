@@ -18,15 +18,13 @@ public:
 	ATeleportZone();
 
 protected:
-	UFUNCTION()
-	void HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UBoxComponent* OverlapComp;
 
 public:	
 
-	UPROPERTY(EditAnywhere, Category="Teleport")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Teleport")
 	FVector TeleportTarget;
 
 };
