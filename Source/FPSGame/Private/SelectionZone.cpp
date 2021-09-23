@@ -22,8 +22,8 @@ ASelectionZone::ASelectionZone()
 
 	OverlapComp->SetHiddenInGame(false);
 
-	OverlapComp->OnComponentBeginOverlap.AddDynamic(this, &ASelectionZone::HandleOverlap);
-	OverlapComp->OnComponentEndOverlap.AddDynamic(this, &ASelectionZone::OnOverlapEnd);
+	//OverlapComp->OnComponentBeginOverlap.AddDynamic(this, &ASelectionZone::HandleOverlap);
+	//OverlapComp->OnComponentEndOverlap.AddDynamic(this, &ASelectionZone::OnOverlapEnd);
 
 
 	DecalComp = CreateDefaultSubobject<UDecalComponent>(TEXT("DecalComp"));
@@ -35,76 +35,76 @@ ASelectionZone::ASelectionZone()
 
 
 
-void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	
-	// Check if a Pawn overlapped with the zone
-	APawn* InstigatorPawn = Cast<APawn>(OtherActor);
-
-	if (InstigatorPawn)
-	{
-		//CurrentOccupiers++;
-
-		// Get the Controller that is posessing the Pawn
-
-		AFPSPlayerController* ControllerInstigator = Cast<AFPSPlayerController>(InstigatorPawn->GetController());
-
-		if (ControllerInstigator)
-		{
-			if (CurrentOccupiers.Num() == 0)
-			{
-				OccupyingController = ControllerInstigator;
-			}
-
-			CurrentOccupiers.Add(ControllerInstigator);
-
-			if (bIsPacManZone)
-			{
-				ControllerInstigator->bIsPacMan = true;
-			}
-
-			AFPSGameMode* GM = Cast<AFPSGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-
-			if (GM)
-			{
-				GM->OnPlayerEnterSelectionZone(ControllerInstigator);
-			}
-		}
-
-		UE_LOG(LogTemp, Log, TEXT("Overlapped with selection zone!"));
-
-	}
-
-}
-
-void ASelectionZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	APawn* InstigatorPawn = Cast<APawn>(OtherActor);
-
-	if (InstigatorPawn)
-	{
-		//CurrentOccupiers --;
-		
-
-		AFPSPlayerController* ControllerInstigator = Cast<AFPSPlayerController>(InstigatorPawn->GetController());
-
-		if (ControllerInstigator)
-		{
-			if (bIsPacManZone)
-			{
-				ControllerInstigator->bIsPacMan = false;
-			}
-		}
-		CurrentOccupiers.RemoveSwap(ControllerInstigator);
-
-		if (CurrentOccupiers.Num() == 0)
-		{
-			OccupyingController = nullptr;
-		}
-		else
-		{
-			OccupyingController = CurrentOccupiers[0];
-		}
-	}
-}
+//void ASelectionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+//	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+//{
+//	
+//	// Check if a Pawn overlapped with the zone
+//	APawn* InstigatorPawn = Cast<APawn>(OtherActor);
+//
+//	if (InstigatorPawn)
+//	{
+//		//CurrentOccupiers++;
+//
+//		// Get the Controller that is posessing the Pawn
+//
+//		AFPSPlayerController* ControllerInstigator = Cast<AFPSPlayerController>(InstigatorPawn->GetController());
+//
+//		if (ControllerInstigator)
+//		{
+//			if (CurrentOccupiers.Num() == 0)
+//			{
+//				OccupyingController = ControllerInstigator;
+//			}
+//
+//			CurrentOccupiers.Add(ControllerInstigator);
+//
+//			if (bIsPacManZone)
+//			{
+//				ControllerInstigator->bIsPacMan = true;
+//			}
+//
+//			AFPSGameMode* GM = Cast<AFPSGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+//
+//			if (GM)
+//			{
+//				GM->OnPlayerEnterSelectionZone(ControllerInstigator);
+//			}
+//		}
+//
+//		UE_LOG(LogTemp, Log, TEXT("Overlapped with selection zone!"));
+//
+//	}
+//
+//}
+//
+//void ASelectionZone::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+//{
+//	APawn* InstigatorPawn = Cast<APawn>(OtherActor);
+//
+//	if (InstigatorPawn)
+//	{
+//		//CurrentOccupiers --;
+//		
+//
+//		AFPSPlayerController* ControllerInstigator = Cast<AFPSPlayerController>(InstigatorPawn->GetController());
+//
+//		if (ControllerInstigator)
+//		{
+//			if (bIsPacManZone)
+//			{
+//				ControllerInstigator->bIsPacMan = false;
+//			}
+//		}
+//		CurrentOccupiers.RemoveSwap(ControllerInstigator);
+//
+//		if (CurrentOccupiers.Num() == 0)
+//		{
+//			OccupyingController = nullptr;
+//		}
+//		else
+//		{
+//			OccupyingController = CurrentOccupiers[0];
+//		}
+//	}
+//}

@@ -27,88 +27,88 @@ AFPSGameMode::AFPSGameMode()
 }
 
 
-void AFPSGameMode::OnPlayerEnterSelectionZone(AFPSPlayerController* ControllerInstigator)
-{
+//void AFPSGameMode::OnPlayerEnterSelectionZone(AFPSPlayerController* ControllerInstigator)
+//{
+//
+//	if (ControllerInstigator->bIsPacMan)
+//	{
+//		bHasPacMan = true;
+//	}
+//
+//	CheckStartingConditions();
+//}
+//
+//void AFPSGameMode::CheckStartingConditions()
+//{
+//	// If the number of occupied zones == the number of players and we have a PacMan we are good to go.
+//	int OccupiedZones = 0;
+//	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
+//	{
+//		if (Zone->CurrentOccupiers.Num()  == 1)
+//		{
+//			OccupiedZones++;
+//		}
+//	}
+//
+//	TArray<AActor*> ReturnedActors;
+//	UGameplayStatics::GetAllActorsOfClass(this, AFPSPlayerController::StaticClass(), ReturnedActors);
+//
+//	if (bHasPacMan && !bIsGameRunning && OccupiedZones == FGenericPlatformMath::Min(ReturnedActors.Num(), 5) && OccupiedZones >= 3)
+//	{
+//		StartGame();
+//	}
+//}
+//
+//void AFPSGameMode::StartGame()
+//{
+//	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
+//	{
+//		if (Zone->OccupyingController)
+//		{
+//			Zone->SpawnCharacter();
+//		}
+//	}
+//
+//	bIsGameRunning = true;
+//	AFPSGameMode::StartTimer();
+//}
 
-	if (ControllerInstigator->bIsPacMan)
-	{
-		bHasPacMan = true;
-	}
-
-	CheckStartingConditions();
-}
-
-void AFPSGameMode::CheckStartingConditions()
-{
-	// If the number of occupied zones == the number of players and we have a PacMan we are good to go.
-	int OccupiedZones = 0;
-	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
-	{
-		if (Zone->CurrentOccupiers.Num()  == 1)
-		{
-			OccupiedZones++;
-		}
-	}
-
-	TArray<AActor*> ReturnedActors;
-	UGameplayStatics::GetAllActorsOfClass(this, AFPSPlayerController::StaticClass(), ReturnedActors);
-
-	if (bHasPacMan && !bIsGameRunning && OccupiedZones == FGenericPlatformMath::Min(ReturnedActors.Num(), 5) && OccupiedZones >= 3)
-	{
-		StartGame();
-	}
-}
-
-void AFPSGameMode::StartGame()
-{
-	for (ASelectionZone* Zone : TActorRange<ASelectionZone>(GetWorld()))
-	{
-		if (Zone->OccupyingController)
-		{
-			Zone->SpawnCharacter();
-		}
-	}
-
-	bIsGameRunning = true;
-	AFPSGameMode::StartTimer();
-}
-
-void AFPSGameMode::CompleteMission(APawn* InstigatorPawn, bool bMissionSuccess)
-{
-	if (InstigatorPawn)
-	{
-		if (SpectatingViewpointClass)
-		{
-			TArray<AActor*> ReturnedActors;
-			UGameplayStatics::GetAllActorsOfClass(this, SpectatingViewpointClass, ReturnedActors);
-
-			// Change viewtarget if any valid actor found
-			if (ReturnedActors.Num() > 0)
-			{
-				AActor* NewViewTarget = ReturnedActors[0];
-
-				for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
-				{
-					APlayerController* PC = It->Get();
-					if (PC)
-					{
-						PC->SetViewTargetWithBlend(NewViewTarget, 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
-					}
-				}
-			}
-		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("SpectatingViewpointClass is nullptr. Please update GameMode class with valid subclass. Cannot change spectating view target."));
-		}
-	}
-
-	AFPSGameState* GS = GetGameState<AFPSGameState>();
-	if (GS)
-	{
-		GS->MulticastOnMissionComplete(InstigatorPawn, bMissionSuccess);
-	}
-
-
-	OnMissionCompleted(InstigatorPawn, bMissionSuccess);
-}
+//void AFPSGameMode::CompleteMission(APawn* InstigatorPawn, bool bMissionSuccess)
+//{
+//	if (InstigatorPawn)
+//	{
+//		if (SpectatingViewpointClass)
+//		{
+//			TArray<AActor*> ReturnedActors;
+//			UGameplayStatics::GetAllActorsOfClass(this, SpectatingViewpointClass, ReturnedActors);
+//
+//			// Change viewtarget if any valid actor found
+//			if (ReturnedActors.Num() > 0)
+//			{
+//				AActor* NewViewTarget = ReturnedActors[0];
+//
+//				for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
+//				{
+//					APlayerController* PC = It->Get();
+//					if (PC)
+//					{
+//						PC->SetViewTargetWithBlend(NewViewTarget, 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
+//					}
+//				}
+//			}
+//		}
+//		else
+//		{
+//			UE_LOG(LogTemp, Warning, TEXT("SpectatingViewpointClass is nullptr. Please update GameMode class with valid subclass. Cannot change spectating view target."));
+//		}
+//	}
+//
+//	AFPSGameState* GS = GetGameState<AFPSGameState>();
+//	if (GS)
+//	{
+//		GS->MulticastOnMissionComplete(InstigatorPawn, bMissionSuccess);
+//	}
+//
+//
+//	OnMissionCompleted(InstigatorPawn, bMissionSuccess);
+//}

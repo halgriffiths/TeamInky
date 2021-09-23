@@ -37,26 +37,26 @@ void AFPSAIGuard::BeginPlay()
 
 void AFPSAIGuard::OnPawnSeen(APawn* SeenPawn)
 {
-	if (SeenPawn == nullptr)
-	{
-		return;
-	}
+	//if (SeenPawn == nullptr)
+	//{
+	//	return;
+	//}
 
-	DrawDebugSphere(GetWorld(), SeenPawn->GetActorLocation(), 32.0f, 12, FColor::Red, false, 10.0f);
+	//DrawDebugSphere(GetWorld(), SeenPawn->GetActorLocation(), 32.0f, 12, FColor::Red, false, 10.0f);
 
-	AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
-	if (GM)
-	{
-		GM->CompleteMission(SeenPawn, false);
-	}
+	//AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
+	//if (GM)
+	//{
+	//	GM->CompleteMission(SeenPawn, false);
+	//}
 
-	SetGuardState(EAIState::Alerted);
+	//SetGuardState(EAIState::Alerted);
 
-	// Stop Movement if Patrolling
-	if (Controller)
-	{
-		Controller->StopMovement();
-	}
+	//// Stop Movement if Patrolling
+	//if (Controller)
+	//{
+	//	Controller->StopMovement();
+	//}
 }
 
 

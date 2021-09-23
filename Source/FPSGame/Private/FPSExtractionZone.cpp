@@ -31,24 +31,24 @@ AFPSExtractionZone::AFPSExtractionZone()
 void AFPSExtractionZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AFPSCharacter* MyPawn = Cast<AFPSCharacter>(OtherActor);
-	if (MyPawn == nullptr)
-	{
-		return;
-	}
+	//AFPSCharacter* MyPawn = Cast<AFPSCharacter>(OtherActor);
+	//if (MyPawn == nullptr)
+	//{
+	//	return;
+	//}
 
-	if (MyPawn->bIsCarryingObjective)
-	{
-		AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
-		if (GM)
-		{
-			GM->CompleteMission(MyPawn, true);
-		}
-	}
-	else
-	{
-		UGameplayStatics::PlaySound2D(this, ObjectiveMissingSound);
-	}
+	//if (MyPawn->bIsCarryingObjective)
+	//{
+	//	AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
+	//	if (GM)
+	//	{
+	//		GM->CompleteMission(MyPawn, true);
+	//	}
+	//}
+	//else
+	//{
+	//	UGameplayStatics::PlaySound2D(this, ObjectiveMissingSound);
+	//}
 
 	UE_LOG(LogTemp, Log, TEXT("Overlapped with extraction zone!"));
 }

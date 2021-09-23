@@ -22,16 +22,18 @@ public:
 
 	AFPSGameMode();
 
-	void CompleteMission(APawn* InstigatorPawn, bool bMissionSuccess);
+	/*void CompleteMission(APawn* InstigatorPawn, bool bMissionSuccess);*/
 
-	void OnPlayerEnterSelectionZone(AFPSPlayerController* ControllerInstigator);
+	//void OnPlayerEnterSelectionZone(AFPSPlayerController* ControllerInstigator);
 
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
 	void OnMissionCompleted(APawn* InstigatorPawn, bool bMissionSuccess);
-
+	
+	UFUNCTION(BlueprintImplementableEvent)
 	void CheckStartingConditions();
-
+	
+	UFUNCTION(BlueprintImplementableEvent)
 	void StartGame();
 
 	UFUNCTION(BlueprintImplementableEvent)
