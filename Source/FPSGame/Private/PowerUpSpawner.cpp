@@ -27,7 +27,7 @@ void APowerUpSpawner::OnPowerUpPickUp()
 	FTimerHandle TimerHandle;
 
 	TimerDel.BindUFunction(this, FName("SpawnPowerUp"));
-	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, 15.f, false);
+	GetWorldTimerManager().SetTimer(TimerHandle, TimerDel, 10.f, false);
 }
 
 /*
