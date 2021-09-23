@@ -18,21 +18,5 @@ ATeleportZone::ATeleportZone()
 
 	OverlapComp->SetHiddenInGame(false);
 
-	OverlapComp->OnComponentBeginOverlap.AddDynamic(this, &ATeleportZone::HandleOverlap);
 }
 
-
-void ATeleportZone::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	AFPSCharacter* MyPawn = Cast<AFPSCharacter>(OtherActor);
-	if (MyPawn == nullptr)
-	{
-		return;
-	}
-
-
-	// Must make sure that this is executed on the SERVER?
-	MyPawn->SetActorLocation(TeleportTarget);
-
-}
